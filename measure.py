@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+
 """
 # > Script for measuring quantitative performances in terms of
 #    - Structural Similarity Metric (SSIM) 
@@ -23,6 +23,7 @@ from utils.ssm_psnr_utils import getSSIM, getPSNR
 im_w, im_h = 320, 240
 
 ## data paths
+
 REAL_im_dir = "data/sample_test_ufo/lrd/"  # real/input im-dir with {f.ext}
 GEN_im_dir  = "data/output/keras_out/"  # generated im-dir with {f_SESR/EN.ext}
 GTr_im_dir  = "data/sample_test_ufo/hr/"  # ground truth im-dir with {f.ext}
@@ -43,6 +44,7 @@ def measure_UIQMs(dir_name, file_ext=None):
     uqims = []
     for img_path in paths:
         im = Image.open(img_path).resize((im_w, im_h))
+
         uqims.append(getUIQM(np.array(im)))
     return np.array(uqims)
 
@@ -56,17 +58,26 @@ def measure_SSIM(gtr_dir, gen_dir):
     """
     gtr_paths = sorted(glob(join(gtr_dir, "*.*")))
     gen_paths = sorted(glob(join(gen_dir, "*.*")))
+    # print(f"gtr_paths: %s" % gtr_paths)
+    # print(f"gen_paths: {gen_paths}")
     ssims = []
     for gtr_path in gtr_paths:
+       
         fname = basename(gtr_path).split('.')[0]
-        gen_path = join(gen_dir, fname + '_SESR.png') # for SESR
+        # gen_path = join(gen_dir, fname + '_SESR.png') # for SESR
+        gen_path = "C:\\Users\\Zeinab\\Downloads\\Deep_SESR-master\\Deep_SESR-master\\data\\output\\keras_out\\set_f0_En.png"
+        print(f"gen_path: %s" % gen_path)
+        print(f"gen_path: %s" % gen_paths)
         #gen_path = join(gen_dir, fname + '_En.png') # enhancement
         if gen_path in gen_paths:
+            print(f"inside if line 67")
             r_im = Image.open(gtr_path).resize((im_w, im_h))
             g_im = Image.open(gen_path).resize((im_w, im_h))
             # get ssim on RGB channels (SOTA norm)
             ssim = getSSIM(np.array(r_im), np.array(g_im))
+      
             ssims.append(ssim)
+            print(f"ssims inside if : {ssims}")
     return np.array(ssims)
 
 
@@ -95,6 +106,7 @@ def measure_PSNR(gtr_dir, gen_dir):
 
 ### compute SSIM and PSNR
 SSIM_measures = measure_SSIM(GTr_im_dir, GEN_im_dir)
+print(f"SSIM_measures : {SSIM_measures}")
 PSNR_measures = measure_PSNR(GTr_im_dir, GEN_im_dir)
 print ("SSIM >> Mean: {0} std: {1}".format(np.mean(SSIM_measures), np.std(SSIM_measures)))
 print ("PSNR >> Mean: {0} std: {1}".format(np.mean(PSNR_measures), np.std(PSNR_measures)))

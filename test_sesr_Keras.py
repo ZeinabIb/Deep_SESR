@@ -1,10 +1,3 @@
-#/usr/bin/env python
-"""
-# > Script for evaluating 2x SESR 
-#    - Paper: https://arxiv.org/pdf/2002.01155.pdf
-# Maintainer: Jahid (email: islam034@umn.edu)
-# Interactive Robotics and Vision Lab (http://irvlab.cs.umn.edu/)
-"""
 import os
 import time
 import numpy as np
@@ -12,8 +5,10 @@ from glob import glob
 from ntpath import basename
 from os.path import join, exists
 from PIL import Image
-#from keras.models import model_from_json
-from keras.src.models.model import model_from_json
+# from keras.models import model_from_json
+from keras.models import model_from_json # type: ignore
+# from keras.src.models.model import model_from_json
+# from tensorflow.keras.models import model_from_json # type: ignore
 ## local libs
 from utils.data_utils import getPaths
 from utils.data_utils import preprocess, deprocess

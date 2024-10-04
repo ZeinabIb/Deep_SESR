@@ -64,9 +64,11 @@ def eme(x, window_size):
       x.shape[0] = height
       x.shape[1] = width
     """
+   
     # if 4 blocks, then 2x2...etc.
-    k1 = x.shape[1]/window_size
-    k2 = x.shape[0]/window_size
+    k1 = int(x.shape[1]/window_size)
+    k2 = int(x.shape[0]/window_size)
+
 
     # weight
     w = 2./(k1*k2)
@@ -74,12 +76,15 @@ def eme(x, window_size):
     blocksize_x = window_size
     blocksize_y = window_size
 
+
     # make sure image is divisible by window_size - doesn't matter if we cut out some pixels
     x = x[:blocksize_y*k2, :blocksize_x*k1]
+  
 
     val = 0
     for l in range(k1):
         for k in range(k2):
+       
             block = x[k*window_size:window_size*(k+1), l*window_size:window_size*(l+1)]
             max_ = np.max(block)
             min_ = np.min(block)
@@ -109,11 +114,15 @@ def _uism(x):
     R_edge_map = np.multiply(Rs, R)
     G_edge_map = np.multiply(Gs, G)
     B_edge_map = np.multiply(Bs, B)
+  
 
     # get eme for each channel
     r_eme = eme(R_edge_map, 10)
+   
     g_eme = eme(G_edge_map, 10)
     b_eme = eme(B_edge_map, 10)
+
+   
 
     # coefficients
     lambda_r = 0.299
@@ -175,8 +184,8 @@ def _uiconm(x, window_size):
     plip_k      = 1026.0
 
     # if 4 blocks, then 2x2...etc.
-    k1 = x.shape[1]/window_size
-    k2 = x.shape[0]/window_size
+    k1 = int(x.shape[1]/window_size)
+    k2 = int(x.shape[0]/window_size)
 
     # weight
     w = -1./(k1*k2)
@@ -212,16 +221,24 @@ def getUIQM(x):
       Function to return UIQM to be called from other programs
       x: image
     """
+ 
     x = x.astype(np.float32)
     ### from https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7300447
     #c1 = 0.4680; c2 = 0.2745; c3 = 0.2576
     ### from https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7300447
     c1 = 0.0282; c2 = 0.2953; c3 = 3.5753
 
+
     uicm   = _uicm(x)
+
     uism   = _uism(x)
+  
+ 
     uiconm = _uiconm(x, 10)
+
     uiqm = (c1*uicm) + (c2*uism) + (c3*uiconm)
+  
+  
     return uiqm
 
 

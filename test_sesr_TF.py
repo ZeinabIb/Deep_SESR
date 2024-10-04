@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+
 """
 # > Script for evaluating 2x SESR 
 #    - Paper: https://arxiv.org/pdf/2002.01155.pdf 
