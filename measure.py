@@ -25,10 +25,17 @@ im_w, im_h = 320, 240
 
 ## data paths
 
-REAL_im_dir = "data/sample_test_ufo/lrd/"  # real/input im-dir with {f.ext}
+# UFO
+# REAL_im_dir = "data/sample_test_ufo/lrd/"  # real/input im-dir with {f.ext}
+# # GEN_im_dir = "data/output/keras_out/"  # generated im-dir with {f_SESR/EN.ext}
+# GTr_im_dir = "data/sample_test_ufo/hr/"  # ground truth im-dir with {f.ext}
+# GEN_im_dir = "data/output/tf_out/"
+
+# USR
+REAL_im_dir = "data_usr/sample_test_usr/lrd/"  # real/input im-dir with {f.ext}
 # GEN_im_dir = "data/output/keras_out/"  # generated im-dir with {f_SESR/EN.ext}
-GTr_im_dir = "data/sample_test_ufo/hr/"  # ground truth im-dir with {f.ext}
-GEN_im_dir = "data/output/tf_out/"
+GTr_im_dir = "data_usr/sample_test_usr/hr/"  # ground truth im-dir with {f.ext}
+GEN_im_dir = "data_usr/output/tf_out/"
 
 
 ## mesures uqim for all images in a directory
@@ -36,7 +43,7 @@ def measure_UIQMs(dir_name, file_ext=None):
     """
     # measured in RGB
     Assumes:
-      * dir_name contain generated images
+      * dir_name contain generated imagesa
       * to evaluate on all images: file_ext = None
       * to evaluate images that ends with "_SESR.png" or "_En.png"
           * use file_ext = "_SESR.png" or "_En.png"

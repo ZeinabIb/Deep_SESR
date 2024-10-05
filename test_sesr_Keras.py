@@ -22,7 +22,11 @@ lr_res, lr_shape = (lr_w, lr_h), (lr_h, lr_w, 3)
 hr_res, hr_shape = (hr_w, hr_h), (hr_h, hr_w, 3)
 
 ## for testing arbitrary local data
-data_dir = "data/sample_test_ufo/lrd/"
+# UFO DATASET
+# data_dir = "data/sample_test_ufo/lrd/"
+
+# SESR DATASET
+data_dir = "data_usr/sample_test_usr/lrd/"
 # data_dir = "data/test_mixed/"
 test_paths = getPaths(data_dir)
 print("{0} test images are loaded".format(len(test_paths)))
@@ -41,7 +45,7 @@ generator.load_weights(model_h5)
 print("\nLoaded data and model")
 
 ## create dir for output test data
-samples_dir = join("data/output/", "keras_out")
+samples_dir = join("data_usr/output/", "keras_out")
 if not exists(samples_dir):
     os.makedirs(samples_dir)
 

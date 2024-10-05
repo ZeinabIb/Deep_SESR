@@ -71,13 +71,13 @@ lr_res, lr_shape = (lr_w, lr_h), (lr_h, lr_w, 3)
 hr_res, hr_shape = (hr_w, hr_h), (hr_h, hr_w, 3)
 
 ## for testing arbitrary local data
-data_dir = "data/sample_test_ufo/lrd/"
+data_dir = "data_usr/sample_test_usr/lrd/"
 # data_dir = "data/test_mixed/"
 test_paths = getPaths(data_dir)
 print("{0} test images are loaded".format(len(test_paths)))
 
 ## create dir for output test data
-samples_dir = os.path.join("data/output/", "tf_out")
+samples_dir = os.path.join("data_usr/output/", "tf_out")
 if not os.path.exists(samples_dir):
     os.makedirs(samples_dir)
 
